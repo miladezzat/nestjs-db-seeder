@@ -6,3 +6,4 @@ package-lock.json
 tsconfig.json
 .prettierrc
 .commitlintrc.json
+.github

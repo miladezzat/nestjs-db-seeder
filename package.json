@@ -1,6 +1,6 @@
 {
   "name": "nestjs-db-seeder",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "An extension library for NestJS to perform seeding.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,7 +10,10 @@
   "scripts": {
     "build": "tsc",
     "prebuild": "rimraf dist",
-    "dev": "npm run prebuild && tsc -w"
+    "dev": "npm run prebuild && tsc -w",
+    "release:major": "changelog -M && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version major && git push origin && git push origin --tags",
+    "release:minor": "changelog -m && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags",
+    "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags"
   },
   "repository": {
     "type": "git",
@@ -37,6 +40,8 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.7",
-    "typescript": "^4.8.4"
+    "typescript": "^4.8.4",
+    "generate-changelog": "^1.8.0",
+    "cz-conventional-changelog": "^3.3.0"
   }
 }
