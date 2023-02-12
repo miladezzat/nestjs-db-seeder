@@ -17,10 +17,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/edwardanthony/nestjs-seeder"
+    "url": "git+https://git@github.com:60-min-code/nestjs-db-seeder.git/nestjs-db-seeder"
   },
-  "bugs": "https://github.com/edwardanthony/nestjs-seeder/issues",
-  "homepage": "https://github.com/edwardanthony/nestjs-seeder#readme",
+  "bugs": "https://git@github.com:60-min-code/nestjs-db-seeder.git/nestjs-db-seeder/issues",
+  "homepage": "https://git@github.com:60-min-code/nestjs-db-seeder.git/nestjs-db-seeder#readme",
   "keywords": [
     "seeding",
     "seeder",
@@ -28,7 +28,6 @@
     "nestjs",
     "seeder"
   ],
-  "author": "Edward Anthony <edwardanthony@fastmail.com>",
   "license": "MIT",
   "peerDependencies": {
     "@faker-js/faker": "^7.5.0"
