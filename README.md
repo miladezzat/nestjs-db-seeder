@@ -9,10 +9,7 @@ An extension library for NestJS to perform seeding.
    <a href="https://www.npmjs.com/nestjs-db-seeder" target="_blank">
    <img src="https://img.shields.io/npm/v/nestjs-db-seeder" alt="NPM Version" /></a>
    <a href="https://www.npmjs.com/nestjs-db-seeder" target="_blank">
-
-  [![npm version](https://badge.fury.io/js/nestjs-db-seeder.svg)](https://badge.fury.io/js/nestjs-db-seeder)&nbsp;
-  ![https://img.shields.io/npm/dm/nestjs-db-seeder.svg](https://img.shields.io/npm/dm/nestjs-db-seeder.svg)
-
+    <img src="https://img.shields.io/npm/dm/nestjs-db-seeder" alt="NPM Downloads" /></a>
 </p>
 
 ### This library does not depend on the database type that you use
