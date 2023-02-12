@@ -15,18 +15,13 @@
     "release:minor": "changelog -m && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags",
     "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://git@github.com:60-min-code/nestjs-db-seeder.git/nestjs-db-seeder"
-  },
-  "bugs": "https://git@github.com:60-min-code/nestjs-db-seeder.git/nestjs-db-seeder/issues",
-  "homepage": "https://git@github.com:60-min-code/nestjs-db-seeder.git/nestjs-db-seeder#readme",
   "keywords": [
     "seeding",
     "seeder",
     "seed",
     "nestjs",
-    "seeder"
+    "seeder",
+    "database seeding"
   ],
   "license": "MIT",
   "peerDependencies": {
@@ -42,5 +37,14 @@
     "typescript": "^4.8.4",
     "generate-changelog": "^1.8.0",
     "cz-conventional-changelog": "^3.3.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/60-min-code/nestjs-db-seeder.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/60-min-code/nestjs-db-seeder/issues"
+  },
+  "homepage": "https://github.com/60-min-code/nestjs-db-seeder#readme"
 }
