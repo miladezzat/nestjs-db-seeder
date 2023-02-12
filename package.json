@@ -1,5 +1,5 @@
 {
-  "name": "nestjs-seeder",
+  "name": "nestjs-db-seeder",
   "version": "0.3.0",
   "description": "An extension library for NestJS to perform seeding.",
   "main": "dist/index.js",

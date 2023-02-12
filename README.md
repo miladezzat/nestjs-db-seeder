@@ -3,21 +3,14 @@ An extension library for NestJS to perform seeding.
 </p>
 <p align="center" style="max-width: 450px; margin: auto;">
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-   <a href="https://github.com/edwardanthony/nestjs-seeder" title="All Contributors"><img src="https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square" /></a>
+   <a href="https://github.com/60-min-code/nestjs-db-seeder" title="All Contributors"><img src="https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square" /></a>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-   <a href="https://github.com/edwardanthony/nestjs-seeder"><img src="https://img.shields.io/spiget/stars/1000?color=brightgreen&label=Star&logo=github" /></a>
-   <a href="https://www.npmjs.com/nestjs-seeder" target="_blank">
-   <img src="https://img.shields.io/npm/v/nestjs-seeder" alt="NPM Version" /></a>
-   <a href="https://www.npmjs.com/nestjs-seeder" target="_blank">
-   <img src="https://img.shields.io/npm/l/nestjs-seeder" alt="Package License" /></a>
-   <a href="https://www.npmjs.com/nestjs-seeder" target="_blank">
-   <img src="https://img.shields.io/npm/dm/nestjs-seeder" alt="NPM Downloads" /></a>
-   <a href="https://github.com/edwardanthony/nestjs-seeder" target="_blank">
-   <img src="https://s3.amazonaws.com/assets.coveralls.io/badges/coveralls_95.svg" alt="Coverage" /></a>
-   <a href="https://github.com/edwardanthony/nestjs-seeder"><img src="https://img.shields.io/badge/Github%20Page-nestjs.seeder-yellow?style=flat-square&logo=github" /></a>
-   <a href="https://github.com/edwardanthony"><img src="https://img.shields.io/badge/Author-Edward%20Anthony-blueviolet?style=flat-square&logo=appveyor" /></a>
-   <a href="https://twitter.com/edward_anthony8" target="_blank">
-   <img src="https://img.shields.io/twitter/follow/edward_anthony8.svg?style=social&label=Follow"></a>
+   <a href="https://github.com/60-min-code/nestjs-db-seeder"><img src="https://img.shields.io/spiget/stars/1000?color=brightgreen&label=Star&logo=github" /></a>
+   <a href="https://www.npmjs.com/nestjs-db-seeder" target="_blank">
+   <img src="https://img.shields.io/npm/v/nestjs-db-seeder" alt="NPM Version" /></a>
+   <a href="https://www.npmjs.com/nestjs-db-seeder" target="_blank">
+   <img src="https://img.shields.io/npm/l/nestjs-db-seeder" alt="Package License" /></a>
+   <a href="https://github.com/60-min-code/nestjs-db-seeder" target="_blank">
 </p>
 
 ### This library does not depend on the database type that you use
@@ -26,7 +19,7 @@ An extension library for NestJS to perform seeding.
 
 ### 1. Install the dependency
 
-`npm install nestjs-seeder --save-dev`
+`npm install nestjs-db-seeder --save-dev or yarn install nestjs-db-seeder -D`
 
 ### 2. Define the model class
 
@@ -37,11 +30,11 @@ In this example, we'll use `@nestjs/mongoose` to define our model. But you could
 ```typescript
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
-import { Factory } from "nestjs-seeder";
+import { Factory } from "nestjs-db-seeder";
 
 @Schema()
 export class User extends Document {
-  @Factory(faker => faker.name.fullName())
+  @Factory(faker => faker.name.findName())
   @Prop()
   name: string;
 }
@@ -96,7 +89,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { User } from "../schemas/user.schema";
-import { Seeder, DataFactory } from "nestjs-seeder";
+import { Seeder, DataFactory } from "nestjs-db-seeder";
 
 @Injectable()
 export class UsersSeeder implements Seeder {
@@ -123,14 +116,14 @@ Create a seeder file under `src` folder in your NestJS project and name it `seed
 #### src/seeder.ts
 
 ```typescript
-import { seeder } from "nestjs-seeder";
+import { seeder } from "nestjs-db-seeder";
 import { MongooseModule } from "@nestjs/mongoose";
 import { User, userSchema } from "./schemas/user.schema";
 import { UsersSeeder } from "./seeders/users.seeder";
 
 seeder({
   imports: [
-    MongooseModule.forRoot("mongodb://localhost/nestjs-seeder-sample"),
+    MongooseModule.forRoot("mongodb://localhost/nestjs-db-seeder-sample"),
     MongooseModule.forFeature([{ name: User.name, schema: userSchema }]),
   ],
 }).run([UsersSeeder]);
@@ -149,20 +142,21 @@ If you want to run multiple seeders, you could do:
 
 ### 5. Integrate your seeder into command line
 
-Add these two script (`seed` and `seed:refresh`) under the `scripts` property in your `package.json` file:
+Add these two script (`seed`, `seed:refresh` and `seed:drop`) under the `scripts` property in your `package.json` file:
 
 #### package.json
 
 ```json
 "scripts": {
   "seed": "node dist/seeder",
-  "seed:refresh": "node dist/seeder --refresh"
+  "seed:refresh": "node dist/seeder --refresh",
+  "seed:drop": "node dist/seeder --drop"
 }
 ```
 
-**NOTE:** Don't replace the `scripts`. Add both `seed` and `seed:refresh` scripts after your existing scripts.
+**NOTE:** Don't replace the `scripts`. Add both `seed`, `seed:refresh` and `seed:drop` scripts after your existing scripts.
 
-With the scripts integrated in the `package.json` file, now you could run 2 different commands:
+With the scripts integrated in the `package.json` file, now you could run 3 different commands:
 
 #### Run seeders normally
 
@@ -171,6 +165,10 @@ With the scripts integrated in the `package.json` file, now you could run 2 diff
 #### Run seeders and replace existing data
 
 `npm run seed:refresh`
+
+#### Remove all existing data
+
+`npm run seed:drop`
 
 ## Advance Usage
 
@@ -181,11 +179,11 @@ With the scripts integrated in the `package.json` file, now you could run 2 diff
 ```typescript
 @Schema()
 export class User extends Document {
-  @Factory(faker => faker.helpers.arrayElement(['male', 'female']))
+  @Factory(faker => faker.random.arrayElement(["male", "female"]))
   @Prop({ required: true })
   gender: string;
 
-  @Factory((faker, ctx) => faker.name.firstName(ctx.gender))
+  @Factory((faker, ctx) => faker.name.firstName(ctx.gender === "male" ? 0 : 1))
   @Prop({ required: true })
   firstName: string;
 }
@@ -216,4 +214,4 @@ export class User extends Document {
 
 ## 📜 License
 
-`nestjs-seeder` is [MIT licensed](LICENSE).
+`nestjs-db-seeder` is [MIT licensed](LICENSE).
